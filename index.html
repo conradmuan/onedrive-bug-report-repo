@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>OneDrive File Picker Demo</title>
+</head>
+<body>
+  <h1>Demo of File Picker in an isolated Env</h1>
+  <button onClick="launchOneDrivePicker()">Launch the picker</button>
+  <script type="text/javascript" src="https://js.live.net/v7.2/OneDrive.js"></script>
+  <script>
+
+    var creds = {
+      clientId: 'REDACTED',
+      accessToken: 'REDACTED-MAKE-SURE-ITS-FRESH',
+      endpointHint: 'REDACTED'
+    };
+
+    function launchOneDrivePicker() {
+      var onedrive_options = {
+        clientId: creds.clientId,
+        action: 'share',
+        multiSelect: true,
+        openInNewWindow: false,
+        advanced: {
+          accessToken: creds.accessToken,
+          endpointHint: creds.endpointHint
+        },
+        success: function(data) {
+          console.log(data);
+        },
+        cancel: function(data) {
+          console.log(data);
+        },
+        error: function(e) {
+          console.error(e);
+        }
+      }
+      OneDrive.open(onedrive_options);
+    }
+  </script>
+</body>
+</html>
